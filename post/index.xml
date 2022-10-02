@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on My New Hugo Site</title>
+    <title>Posts on Zahid</title>
     <link>https://F2ncy.github.io/post/</link>
-    <description>Recent content in Posts on My New Hugo Site</description>
+    <description>Recent content in Posts on Zahid</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 02 Oct 2022 17:48:35 +0100</lastBuildDate><atom:link href="https://F2ncy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <pubDate>Sun, 02 Oct 2022 17:48:35 +0100</pubDate>
       
       <guid>https://F2ncy.github.io/post/post/</guid>
-      <description></description>
+      <description>test12435</description>
     </item>
     
   </channel>
