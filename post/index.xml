@@ -13,8 +13,7 @@
       <pubDate>Sun, 02 Oct 2022 17:48:35 +0100</pubDate>
       
       <guid>https://F2ncy.github.io/post/post/</guid>
-      <description>My Network Infrastructure Breakdown:  My network consists of a Ubiquiti EdgeRouter X &amp;amp; a Cisco Catalyst switch. Wireguard is the VPN tunneling protocol used to connect external devices to the network.  Additional Info  My Home LAN
-   Ubiquiti EdgeRouter X - erx.zahid.lan
+      <description>My Network Infrastructure Breakdown:  My network consists of a Ubiquiti EdgeRouter X &amp;amp; a Cisco Catalyst switch. Wireguard is the VPN tunneling protocol used to connect external devices to the network.  Additional Info  My Home LAN   Ubiquiti EdgeRouter X - erx.zahid.lan
   Cisco 3560G - core.zahid.lan
  SVIs for VLANs    Raspberry Pi 4B 8GB - pi.zahid.lan
  Running as a host for Docker containers 120GB M.</description>

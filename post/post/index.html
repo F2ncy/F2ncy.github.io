@@ -5,8 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>An Overview Of My Network - Zahid</title><meta name="Description" content="Undergrad Student Studying BSc Computer Science"><meta property="og:title" content="An Overview Of My Network" />
-<meta property="og:description" content="My Network Infrastructure Breakdown:  My network consists of a Ubiquiti EdgeRouter X &amp; a Cisco Catalyst switch. Wireguard is the VPN tunneling protocol used to connect external devices to the network.  Additional Info  My Home LAN
-   Ubiquiti EdgeRouter X - erx.zahid.lan
+<meta property="og:description" content="My Network Infrastructure Breakdown:  My network consists of a Ubiquiti EdgeRouter X &amp; a Cisco Catalyst switch. Wireguard is the VPN tunneling protocol used to connect external devices to the network.  Additional Info  My Home LAN   Ubiquiti EdgeRouter X - erx.zahid.lan
   Cisco 3560G - core.zahid.lan
  SVIs for VLANs    Raspberry Pi 4B 8GB - pi.zahid.lan
  Running as a host for Docker containers 120GB M." />
@@ -16,8 +15,7 @@
 <meta property="article:modified_time" content="2022-10-02T17:48:35+01:00" /><meta property="og:site_name" content="Zahid&#39;s Site" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="An Overview Of My Network"/>
-<meta name="twitter:description" content="My Network Infrastructure Breakdown:  My network consists of a Ubiquiti EdgeRouter X &amp; a Cisco Catalyst switch. Wireguard is the VPN tunneling protocol used to connect external devices to the network.  Additional Info  My Home LAN
-   Ubiquiti EdgeRouter X - erx.zahid.lan
+<meta name="twitter:description" content="My Network Infrastructure Breakdown:  My network consists of a Ubiquiti EdgeRouter X &amp; a Cisco Catalyst switch. Wireguard is the VPN tunneling protocol used to connect external devices to the network.  Additional Info  My Home LAN   Ubiquiti EdgeRouter X - erx.zahid.lan
   Cisco 3560G - core.zahid.lan
  SVIs for VLANs    Raspberry Pi 4B 8GB - pi.zahid.lan
  Running as a host for Docker containers 120GB M."/>
@@ -33,7 +31,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/F2ncy.github.io\/post\/post\/"
-        },"genre": "post","wordcount":  122 ,
+        },"genre": "post","wordcount":  246 ,
         "url": "https:\/\/F2ncy.github.io\/post\/post\/","datePublished": "2022-10-02T17:48:35+01:00","dateModified": "2022-10-02T17:48:35+01:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -85,8 +83,7 @@
 </ul>
 <h3 id="additional-info"><strong>Additional Info</strong></h3>
 <hr>
-<p><strong>My Home LAN</strong></p>
-<hr>
+<h2 id="my-home-lan"><strong>My Home LAN</strong></h2>
 <ul>
 <li>
 <p>Ubiquiti EdgeRouter X - <code>erx.zahid.lan</code></p>
@@ -124,20 +121,46 @@
 </li>
 </ul>
 <hr>
-<p><strong>Offsite Network</strong> - Owned &amp; Configured By Usman (see <a href="https://blog.usman.network" target="_blank" rel="noopener noreffer ">blog.usman.network</a>)</p>
-<hr>
+<h2 id="usmannet---owned--written-by-usman-see-blogusmannetworkhttpsblogusmannetwork">UsmanNet - Owned &amp; Written By Usman (see <a href="https://blog.usman.network" target="_blank" rel="noopener noreffer ">blog.usman.network</a>)</h2>
 <ul>
 <li>
 <p>Ubiquiti Edgerouter X - <code>erx.usman.lan</code></p>
+<ul>
+<li>WireGuard VPNs to <code>erx.zahid.lan</code> and <code>dn42-vps.lan</code>.</li>
+<li>OSPF area 1 neighbors with<code>erx.zahid.lan</code> and <code>dn42-vps.lan</code>.</li>
+<li>Source NAT on VPN interfaces, such that any outbound traffic destined for DN42, is NATed to a DN42 IP.</li>
+<li>Router-On-A-Stick- VLANs - with a VLAN trunk down to the Cisco 2960G.</li>
+</ul>
 </li>
 <li>
 <p>Cisco 2960G - <code>usman-cisco.lan</code></p>
+<ul>
+<li>Basic Layer 2 switching to normal end user hosts.</li>
+</ul>
 </li>
 <li>
-<p>Raspberry Pi 4B 8GB - <code>pi.usman.lan</code></p>
+<p>Raspberry Pi 4 8GB - <code>pi.usman.lan</code></p>
+<ul>
+<li>Some of the Docker Applications I host:
+<ul>
+<li><a href="https://github.com/MatthewVance/unbound-docker-rpi" target="_blank" rel="noopener noreffer ">Unbound DNS Server</a> DNS A and PTR records, for the <code>.lan</code> domain.</li>
+<li><a href="https://docs.linuxserver.io/images/docker-plex" target="_blank" rel="noopener noreffer ">Plex Media Server</a></li>
+<li><a href="https://radarr.video/" target="_blank" rel="noopener noreffer ">Radarr</a>, <a href="https://sonarr.tv/" target="_blank" rel="noopener noreffer ">Sonarr</a>, <a href="https://github.com/Jackett/Jackett" target="_blank" rel="noopener noreffer ">Jackett</a>, <a href="https://hub.docker.com/r/linuxserver/qbittorrent" target="_blank" rel="noopener noreffer ">qBittorrent</a>.</li>
+<li><a href="https://syncthing.net/" target="_blank" rel="noopener noreffer ">Syncthing</a>.</li>
+<li><a href="https://nginxproxymanager.com/" target="_blank" rel="noopener noreffer ">NGINX Proxy Manager</a> - routes a few of the mentioned services through <a href="https://www.cloudflare.com/en-gb/waf/" target="_blank" rel="noopener noreffer ">Cloudfare&rsquo;s WAF</a>, for DDOS mitigation and public IP obfuscation.</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>
 <p>WD 8TB NAS - <code>nas.usman.lan</code></p>
+<ul>
+<li>SMB Shares.</li>
+<li>Plex Media Server</li>
+</ul>
+</li>
+<li>
+<p>Partly deployed using Drone CI/CD and my own Python Configuration Management Framework. See <a href="https://github.com/usman-u/network-automation" target="_blank" rel="noopener noreffer ">github.com/usman-u/network-automation</a> and <a href="github.com/usman-u/usmannet" rel="">github.com/usman-u/usmannet</a> for more info.</p>
 </li>
 </ul>
 </div></div></div>
