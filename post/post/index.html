@@ -5,9 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>An Overview Of My Network - Zahid</title><meta name="Description" content="Undergrad Student Studying BSc Computer Science"><meta property="og:title" content="An Overview Of My Network" />
-<meta property="og:description" content="My Network Infrastructure Breakdown:  My network consists of a Ubiquiti EdgeRouter X &amp; a Cisco Catalyst switch. Wireguard is the VPN tunneling protocol used to connect external devices to the network.  Additional Info  My Home LAN   Ubiquiti EdgeRouter X - erx.zahid.lan
+<meta property="og:description" content="My network consists of a Ubiquiti EdgeRouter X &amp; a Cisco switch.
+  Wireguard is the VPN tunneling protocol used to connect external devices to the network.
+  WAN network architecture &amp; implementation By Usman
+  Additional Info  My Home LAN   Ubiquiti EdgeRouter X - erx.zahid.lan
   Cisco 3560G - core.zahid.lan
- SVIs for VLANs    Raspberry Pi 4B 8GB - pi.zahid.lan
+  Raspberry Pi 4B 8GB - pi.zahid.lan
  Running as a host for Docker containers 120GB M." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://F2ncy.github.io/post/post/" />
@@ -15,9 +18,12 @@
 <meta property="article:modified_time" content="2022-10-02T17:48:35+01:00" /><meta property="og:site_name" content="Zahid&#39;s Site" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="An Overview Of My Network"/>
-<meta name="twitter:description" content="My Network Infrastructure Breakdown:  My network consists of a Ubiquiti EdgeRouter X &amp; a Cisco Catalyst switch. Wireguard is the VPN tunneling protocol used to connect external devices to the network.  Additional Info  My Home LAN   Ubiquiti EdgeRouter X - erx.zahid.lan
+<meta name="twitter:description" content="My network consists of a Ubiquiti EdgeRouter X &amp; a Cisco switch.
+  Wireguard is the VPN tunneling protocol used to connect external devices to the network.
+  WAN network architecture &amp; implementation By Usman
+  Additional Info  My Home LAN   Ubiquiti EdgeRouter X - erx.zahid.lan
   Cisco 3560G - core.zahid.lan
- SVIs for VLANs    Raspberry Pi 4B 8GB - pi.zahid.lan
+  Raspberry Pi 4B 8GB - pi.zahid.lan
  Running as a host for Docker containers 120GB M."/>
 <meta name="application-name" content="Zahid&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="Zahid&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://F2ncy.github.io/post/post/" /><link rel="prev" href="https://F2ncy.github.io/post/about/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -31,7 +37,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/F2ncy.github.io\/post\/post\/"
-        },"genre": "post","wordcount":  246 ,
+        },"genre": "post","wordcount":  244 ,
         "url": "https:\/\/F2ncy.github.io\/post\/post\/","datePublished": "2022-10-02T17:48:35+01:00","dateModified": "2022-10-02T17:48:35+01:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -76,10 +82,16 @@
         data-sizes="auto"
         alt="/NetworkDiagram1.png"
         title="Network Diagram.png" /></a></p>
-<h3 id="my-network-infrastructure-breakdown"><strong>My Network Infrastructure Breakdown:</strong></h3>
 <ul>
-<li>My network consists of a Ubiquiti EdgeRouter X &amp; a Cisco Catalyst switch.</li>
-<li>Wireguard is the VPN tunneling protocol used to connect external devices to the network.</li>
+<li>
+<p>My network consists of a Ubiquiti EdgeRouter X &amp; a Cisco switch.</p>
+</li>
+<li>
+<p>Wireguard is the VPN tunneling protocol used to connect external devices to the network.</p>
+</li>
+<li>
+<p>WAN network architecture &amp; implementation By <a href="https://blog.usman.network" target="_blank" rel="noopener noreffer ">Usman</a></p>
+</li>
 </ul>
 <h3 id="additional-info"><strong>Additional Info</strong></h3>
 <hr>
@@ -90,31 +102,21 @@
 </li>
 <li>
 <p>Cisco 3560G - <code>core.zahid.lan</code></p>
-<ul>
-<li>SVIs for VLANs</li>
-</ul>
 </li>
 <li>
 <p>Raspberry Pi 4B 8GB - <code>pi.zahid.lan</code></p>
 <ul>
 <li>Running as a host for Docker containers</li>
 <li>120GB M.2 SATA SSD (boot drive) + 8TB HDD</li>
-<li>Docker Containers Hosted:
+<li>Docker Containers:
 <ul>
-<li><a href="https://hub.docker.com/r/portainer/portainer-ce" target="_blank" rel="noopener noreffer ">Portainer</a></li>
-<li><a href="https://docs.linuxserver.io/images/docker-plex" target="_blank" rel="noopener noreffer ">Plex Media Server</a></li>
-<li><a href="https://docs.linuxserver.io/images/docker-sonarr" target="_blank" rel="noopener noreffer ">Sonarr</a></li>
-<li><a href="https://docs.linuxserver.io/images/docker-radarr" target="_blank" rel="noopener noreffer ">Radarr</a></li>
-<li><a href="https://docs.linuxserver.io/images/docker-jackett" target="_blank" rel="noopener noreffer ">Jackett</a></li>
-<li><a href="https://docs.linuxserver.io/images/docker-qbittorrent" target="_blank" rel="noopener noreffer ">Qbittorrent</a></li>
-<li><a href="https://hub.docker.com/r/qmcgaw/gluetun" target="_blank" rel="noopener noreffer ">Gluetun</a></li>
-<li><a href="https://hub.docker.com/r/netdata/netdata" target="_blank" rel="noopener noreffer ">Netdata</a></li>
-<li><a href="https://docs.linuxserver.io/images/docker-wireguard" target="_blank" rel="noopener noreffer ">Wireguard</a></li>
-<li><a href="https://docs.linuxserver.io/images/docker-nextcloud" target="_blank" rel="noopener noreffer ">Nextcloud</a></li>
-<li><a href="https://hub.docker.com/r/linuxserver/mysql" target="_blank" rel="noopener noreffer ">MySQL</a></li>
-<li><a href="https://docs.linuxserver.io/images/docker-nginx" target="_blank" rel="noopener noreffer ">Nginx Proxy Manager</a></li>
-<li><a href="https://docs.linuxserver.io/images/docker-homeassistant" target="_blank" rel="noopener noreffer ">Home Assistant</a></li>
-<li><a href="https://docs.linuxserver.io/images/docker-tautulli" target="_blank" rel="noopener noreffer ">Tautulli</a></li>
+<li><a href="https://hub.docker.com/r/portainer/portainer-ce" target="_blank" rel="noopener noreffer ">Portainer</a>, <a href="https://docs.linuxserver.io/images/docker-plex" target="_blank" rel="noopener noreffer ">Plex Media Server</a></li>
+<li><a href="https://docs.linuxserver.io/images/docker-sonarr" target="_blank" rel="noopener noreffer ">Sonarr</a>, <a href="https://docs.linuxserver.io/images/docker-radarr" target="_blank" rel="noopener noreffer ">Radarr</a></li>
+<li><a href="https://docs.linuxserver.io/images/docker-jackett" target="_blank" rel="noopener noreffer ">Jackett</a>, <a href="https://docs.linuxserver.io/images/docker-qbittorrent" target="_blank" rel="noopener noreffer ">Qbittorrent</a></li>
+<li><a href="https://hub.docker.com/r/qmcgaw/gluetun" target="_blank" rel="noopener noreffer ">Gluetun</a>, <a href="https://hub.docker.com/r/netdata/netdata" target="_blank" rel="noopener noreffer ">Netdata</a></li>
+<li><a href="https://docs.linuxserver.io/images/docker-wireguard" target="_blank" rel="noopener noreffer ">Wireguard</a>, <a href="https://docs.linuxserver.io/images/docker-nextcloud" target="_blank" rel="noopener noreffer ">Nextcloud</a></li>
+<li><a href="https://hub.docker.com/r/linuxserver/mysql" target="_blank" rel="noopener noreffer ">MySQL</a>, <a href="https://docs.linuxserver.io/images/docker-nginx" target="_blank" rel="noopener noreffer ">Nginx Proxy Manager</a></li>
+<li><a href="https://docs.linuxserver.io/images/docker-homeassistant" target="_blank" rel="noopener noreffer ">Home Assistant</a>, <a href="https://docs.linuxserver.io/images/docker-tautulli" target="_blank" rel="noopener noreffer ">Tautulli</a></li>
 </ul>
 </li>
 </ul>
