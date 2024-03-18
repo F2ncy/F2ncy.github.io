@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 02 Oct 2022 17:48:35 +0100</lastBuildDate><atom:link href="https://F2ncy.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>An Overview Of My Network</title>
-      <link>https://F2ncy.github.io/post/post/</link>
+      <link>https://F2ncy.github.io/post/net/</link>
       <pubDate>Sun, 02 Oct 2022 17:48:35 +0100</pubDate>
       
-      <guid>https://F2ncy.github.io/post/post/</guid>
+      <guid>https://F2ncy.github.io/post/net/</guid>
       <description>My network consists of a Ubiquiti EdgeRouter X &amp;amp; a Cisco switch.
   Wireguard is the VPN tunneling protocol used to connect external devices to the network.
   WAN network architecture &amp;amp; implementation By Usman
@@ -29,6 +29,15 @@
       
       <guid>https://F2ncy.github.io/post/about/</guid>
       <description>Hi, my name is Zahid and I&amp;rsquo;m a 2nd year undegraduate student studying Computer Science @ Brunel University London. After I graduate I&amp;rsquo;m aspiring to be a Network Architect.</description>
+    </item>
+
+    <item>
+      <title>Lightweight Hard Drive Failure Prediction</title>
+      <link>https://F2ncy.github.io/post/hddfailurepred/</link>
+      <pubDate>Mon, 18 Mar 2024 14:40:45 +0100</pubDate>
+      
+      <guid>https://F2ncy.github.io/post/hddfailurepred/</guid>
+      <description>This is the final solution created to support my dissertation which explores hard drive disk failure prediction using machine learning. The purpose is to find an optimal model for lightweight devices which has a fast testing time against high F1 scores, recall, accuracy, etc.</description>
     </item>
     
   </channel>
