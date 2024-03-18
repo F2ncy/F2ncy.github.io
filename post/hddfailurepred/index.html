@@ -33,13 +33,6 @@
                 "name": "Author"
             },"description": ""
     }
-    <style>
-        h2 {
-            padding-bottom: 8px;
-            margin-bottom: 8px;
-            border-bottom: solid 1px #e1e1e1;
-          }
-    </style>
     </script></head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
@@ -73,12 +66,12 @@
                     <p>This is the final solution created to support my dissertation which explores hard drive disk failure prediction using machine learning. The purpose is to find an optimal model for lightweight devices which has a fast testing time against high F1 scores, recall, accuracy, etc.</p>
 <p>The final solution was built using the LightGBM model.</p>
 <p><img src="https://github.com/F2ncy/HDD-Prediction/assets/78828685/901e789c-b0f0-4c82-a062-4646dde1bfac" alt="image"></p>
-<h2 id="requirements">Requirements</h2>
+<h2 style="padding-bottom: 8px; margin-bottom: 8px; border-bottom: solid 1px #e1e1e1;" id="requirements">Requirements</h2>
 <ul>
 <li><a href="https://pimylifeup.com/raspberry-pi-docker/">Docker</a></li>
 <li><a href="https://www.python.org/downloads/">Python</a></li>
 </ul>
-<h2 id="run-with-docker">Run With Docker</h2>
+<h2 style="padding-bottom: 8px; margin-bottom: 8px; border-bottom: solid 1px #e1e1e1;" id="run-with-docker">Run With Docker</h2>
 <h3 id="image">Image</h3>
 <p><a href="https://ghcr.io/f2ncy/disk_failure_prediction">ghcr.io/f2ncy/disk_failure_prediction</a></p>
 <ul>
@@ -96,7 +89,7 @@
 <ul>
 <li>docker run --privileged -v hddpredict:/predictt -i --device=<code>/dev/sda</code> -p 5001:5000 disk_failure_prediction:latest</li>
 </ul>
-<h2 id="additional-information">Additional Information</h2>
+<h2 style="padding-bottom: 8px; margin-bottom: 8px; border-bottom: solid 1px #e1e1e1;" id="additional-information">Additional Information</h2>
 <p><code>Prediction: 0</code> - Indicates the model thinks the drive will not fail</p>
 <p><code>Prediction: 1</code> - Indicates the model thinks the drive is highly likely to fail</p>
 <p>Works with all types of drives including ATA, SATA, NVME, etc.</p>
