@@ -3,28 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- 🧠 Page Metadata -->
-  <title>Deployed Docker Containers - Zahid</title>
+  <meta name="robots" content="noodp" />
+  <title>Deployed Docker Containers – Zahid</title>
   <meta name="description" content="Overview of the key Docker-based services I run locally for media management, monitoring, and file sharing.">
-  <meta property="og:title" content="Deployed Docker Containers - Zahid">
-  <meta property="og:description" content="Overview of the key Docker-based services I run locally for media management, monitoring, and file sharing.">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://F2ncy.github.io/post/docker/">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Deployed Docker Containers - Zahid">
-  <meta name="twitter:description" content="Overview of the key Docker-based services I run locally for media management, monitoring, and file sharing.">
+  <meta property="og:title" content="Deployed Docker Containers – Zahid" />
+  <meta property="og:description" content="Overview of the key Docker-based services I run locally for media management, monitoring, and file sharing." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://F2ncy.github.io/post/docker/" />
+  <meta property="og:site_name" content="Zahid's Site" />
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="Deployed Docker Containers – Zahid"/>
+  <meta name="twitter:description" content="Overview of the key Docker-based services I run locally for media management, monitoring, and file sharing."/>
   <meta name="theme-color" content="#ffffff">
-  <link rel="canonical" href="https://F2ncy.github.io/post/docker/">
+  <link rel="canonical" href="https://F2ncy.github.io/post/docker/" />
 
-  <!-- 🧩 Styles -->
   <link rel="stylesheet" href="/css/style.min.css">
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css">
-  </noscript>
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript>
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript>
 </head>
-
 <body data-header-desktop="fixed" data-header-mobile="auto">
 <script>
   (window.localStorage && localStorage.getItem('theme') ?
@@ -35,9 +33,10 @@
     document.body.setAttribute('theme', 'dark');
 </script>
 
+<div id="mask"></div>
 <div class="wrapper">
 
-  <!-- 🧭 Header Navigation -->
+  <!-- Desktop Header -->
   <header class="desktop" id="header-desktop">
     <div class="header-wrapper">
       <div class="header-title"><a href="/" title="Zahid">HomePage</a></div>
@@ -45,6 +44,7 @@
         <div class="menu-inner">
           <a class="menu-item" href="/post/about/" title="About">About</a>
           <a class="menu-item active" href="/post/" title="Posts">Posts</a>
+          <span class="menu-item delimiter"></span>
           <a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
             <i class="fas fa-adjust fa-fw"></i>
           </a>
@@ -53,6 +53,7 @@
     </div>
   </header>
 
+  <!-- Mobile Header -->
   <header class="mobile" id="header-mobile">
     <div class="header-container">
       <div class="header-wrapper">
@@ -69,64 +70,56 @@
     </div>
   </header>
 
-  <!-- 📝 Main Content Area -->
+  <!-- Main Content -->
   <main class="main">
     <div class="container">
       <div class="page single special">
         <h1 class="single-title animate__animated animate__pulse animate__faster">Deployed Docker Containers</h1>
         <div class="content" id="content">
 
-          <!-- Sonarr -->
-          <section class="service">
+          <section>
             <h2>Sonarr</h2>
             <p>Automated TV series downloader & organizer. Monitors feeds and sends new episodes to your torrent client.</p>
             <img src="https://cdn.simpleicons.org/sonarr" alt="Sonarr Logo" width="64" height="64">
           </section>
 
-          <!-- Radarr -->
-          <section class="service">
+          <section>
             <h2>Radarr</h2>
             <p>Movie-focused counterpart to Sonarr. Tracks upcoming releases and fetches them automatically with your downloader.</p>
             <img src="https://cdn.simpleicons.org/radarr" alt="Radarr Logo" width="64" height="64">
           </section>
 
-          <!-- Portainer -->
-          <section class="service">
+          <section>
             <h2>Portainer</h2>
             <p>Lightweight management UI for Docker. Provides a visual dashboard for containers, images, networks, and volumes.</p>
             <img src="https://cdn.simpleicons.org/portainer" alt="Portainer Logo" width="64" height="64">
           </section>
 
-          <!-- qBittorrent -->
-          <section class="service">
+          <section>
             <h2>qBittorrent</h2>
             <p>User-friendly, open-source BitTorrent client that handles all your torrent downloads, watched by Sonarr/Radarr.</p>
             <img src="https://cdn.simpleicons.org/qbittorrent" alt="qBittorrent Logo" width="64" height="64">
           </section>
 
-          <!-- Jackett -->
-          <section class="service">
+          <section>
             <h2>Jackett</h2>
-            <p>Acting as a proxy for torrent indexers. Translates your tracker queries into a compatible format for Sonarr/Radarr.</p>
+            <p>Acts as a proxy for torrent indexers. Translates tracker queries into a compatible format for Sonarr/Radarr.</p>
             <img src="https://avatars.githubusercontent.com/u/15383019?v=4" alt="Jackett Logo" width="64" height="64">
           </section>
 
-          <!-- Netdata -->
-          <section class="service">
+          <section>
             <h2>Netdata</h2>
             <p>Real-time performance monitoring. Visualizes CPU, memory, disk, network, and container metrics at a glance.</p>
             <img src="https://cdn.simpleicons.org/netdata" alt="Netdata Logo" width="64" height="64">
           </section>
 
-          <!-- Tautulli -->
-          <section class="service">
+          <section>
             <h2>Tautulli</h2>
             <p>Plex monitoring & analytics. Tracks user activity, notifications, and streaming stats for your Plex server.</p>
             <img src="https://play-lh.googleusercontent.com/LHmPG8shnappsJbzM1ItaR_ZqNx6EMGJbGAeGu4Id7JQgYXs8iQJSURwDXSbvyaMdGLB=w240-h480-rw" alt="Tautulli Logo" width="64" height="64">
           </section>
 
-          <!-- Nextcloud -->
-          <section class="service">
+          <section>
             <h2>Nextcloud</h2>
             <p>Self-hosted file sync & share, cloud storage, calendars, contacts, and more, all under your control.</p>
             <img src="https://cdn.simpleicons.org/nextcloud" alt="Nextcloud Logo" width="64" height="64">
@@ -137,7 +130,7 @@
     </div>
   </main>
 
-  <!-- 🦶 Footer -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-line">
@@ -146,13 +139,14 @@
       </div>
       <div class="footer-line">
         <i class="far fa-copyright fa-fw"></i>
-        <span>2022</span>
+        <span>2025</span>
       </div>
     </div>
   </footer>
+
 </div>
 
-<!-- 🎛️ Floating Buttons -->
+<!-- Fixed Buttons -->
 <div id="fixed-buttons">
   <a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
     <i class="fas fa-arrow-up fa-fw"></i>
@@ -162,7 +156,7 @@
   </a>
 </div>
 
-<!-- ⚙️ Scripts -->
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script>
