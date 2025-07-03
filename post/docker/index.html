@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- 🧠 Page Metadata -->
+  <title>Deployed Docker Containers - Zahid</title>
+  <meta name="description" content="Overview of the key Docker-based services I run locally for media management, monitoring, and file sharing.">
+  <meta property="og:title" content="Deployed Docker Containers - Zahid">
+  <meta property="og:description" content="Overview of the key Docker-based services I run locally for media management, monitoring, and file sharing.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://F2ncy.github.io/post/docker/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Deployed Docker Containers - Zahid">
+  <meta name="twitter:description" content="Overview of the key Docker-based services I run locally for media management, monitoring, and file sharing.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://F2ncy.github.io/post/docker/">
+
+  <!-- 🧩 Styles -->
+  <link rel="stylesheet" href="/css/style.min.css">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css">
+  </noscript>
+</head>
+
+<body data-header-desktop="fixed" data-header-mobile="auto">
+<script>
+  (window.localStorage && localStorage.getItem('theme') ?
+    localStorage.getItem('theme') === 'dark' :
+    ('dark' === 'auto' ?
+      window.matchMedia('(prefers-color-scheme: dark)').matches :
+      'dark' === 'dark')) &&
+    document.body.setAttribute('theme', 'dark');
+</script>
+
+<div class="wrapper">
+
+  <!-- 🧭 Header Navigation -->
+  <header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+      <div class="header-title"><a href="/" title="Zahid">HomePage</a></div>
+      <div class="menu">
+        <div class="menu-inner">
+          <a class="menu-item" href="/post/about/" title="About">About</a>
+          <a class="menu-item active" href="/post/" title="Posts">Posts</a>
+          <a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+            <i class="fas fa-adjust fa-fw"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <header class="mobile" id="header-mobile">
+    <div class="header-container">
+      <div class="header-wrapper">
+        <div class="header-title"><a href="/" title="Zahid">HomePage</a></div>
+        <div class="menu-toggle" id="menu-toggle-mobile"><span></span><span></span><span></span></div>
+      </div>
+      <div class="menu" id="menu-mobile">
+        <a class="menu-item" href="/post/about/" title="About">About</a>
+        <a class="menu-item" href="/post/" title="Posts">Posts</a>
+        <a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+          <i class="fas fa-adjust fa-fw"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 📝 Main Content Area -->
+  <main class="main">
+    <div class="container">
+      <div class="page single special">
+        <h1 class="single-title animate__animated animate__pulse animate__faster">Deployed Docker Containers</h1>
+        <div class="content" id="content">
+
+          <!-- Sonarr -->
+          <section class="service">
+            <h2>Sonarr</h2>
+            <p>Automated TV series downloader & organizer—monitors feeds and sends new episodes to your torrent client.</p>
+            <img src="https://cdn.simpleicons.org/sonarr" alt="Sonarr Logo" width="64" height="64">
+          </section>
+
+          <!-- Radarr -->
+          <section class="service">
+            <h2>Radarr</h2>
+            <p>Movie-focused counterpart to Sonarr—tracks upcoming releases and fetches them automatically with your downloader.</p>
+            <img src="https://cdn.simpleicons.org/radarr" alt="Radarr Logo" width="64" height="64">
+          </section>
+
+          <!-- Portainer -->
+          <section class="service">
+            <h2>Portainer</h2>
+            <p>Lightweight management UI for Docker—gives you a visual dashboard for containers, images, networks, and volumes.</p>
+            <img src="https://cdn.simpleicons.org/portainer" alt="Portainer Logo" width="64" height="64">
+          </section>
+
+          <!-- qBittorrent -->
+          <section class="service">
+            <h2>qBittorrent</h2>
+            <p>User-friendly, open-source BitTorrent client—handles all your torrent downloads, watched by Sonarr/Radarr.</p>
+            <img src="https://cdn.simpleicons.org/qbittorrent" alt="qBittorrent Logo" width="64" height="64">
+          </section>
+
+          <!-- Jackett -->
+          <section class="service">
+            <h2>Jackett</h2>
+            <p>Acting as a proxy for torrent indexers—translates your tracker queries into a compatible format for Sonarr/Radarr.</p>
+            <img src="https://cdn.simpleicons.org/jackett" alt="Jackett Logo" width="64" height="64">
+          </section>
+
+          <!-- Netdata -->
+          <section class="service">
+            <h2>Netdata</h2>
+            <p>Real-time performance monitoring—visualizes CPU, memory, disk, network, and container metrics at a glance.</p>
+            <img src="https://cdn.simpleicons.org/netdata" alt="Netdata Logo" width="64" height="64">
+          </section>
+
+          <!-- Tautulli -->
+          <section class="service">
+            <h2>Tautulli</h2>
+            <p>Plex monitoring & analytics—tracks user activity, notifications, and streaming stats for your Plex server.</p>
+            <img src="https://cdn.simpleicons.org/tautulli" alt="Tautulli Logo" width="64" height="64">
+          </section>
+
+          <!-- Nextcloud -->
+          <section class="service">
+            <h2>Nextcloud</h2>
+            <p>Self-hosted file sync & share—cloud storage, calendars, contacts, and more, all under your control.</p>
+            <img src="https://cdn.simpleicons.org/nextcloud" alt="Nextcloud Logo" width="64" height="64">
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 🦶 Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-line">
+        Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> |
+        Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreferrer">LoveIt</a>
+      </div>
+      <div class="footer-line">
+        <i class="far fa-copyright fa-fw"></i>
+        <span>2022</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- 🎛️ Floating Buttons -->
+<div id="fixed-buttons">
+  <a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+    <i class="fas fa-arrow-up fa-fw"></i>
+  </a>
+  <a href="#" id="view-comments" class="fixed-button" title="View Comments">
+    <i class="fas fa-comment fa-fw"></i>
+  </a>
+</div>
+
+<!-- ⚙️ Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script>
+<script src="/js/theme.min.js"></script>
+</body>
+</html>
