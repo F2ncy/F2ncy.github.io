@@ -1,105 +1,148 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WireGuard Setup - Raspberry Pi 4B</title>
-  <meta name="description" content="Step-by-step guide to setting up WireGuard VPN on a Raspberry Pi 4B.">
-  <link rel="stylesheet" href="/css/style.min.css">
+  <title>WireGuard Setup on Raspberry Pi 4B</title>
+  <meta name="description" content="Step-by-step guide to setting up WireGuard VPN on a Raspberry Pi 4B">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
   <style>
-    body { font-family: system-ui, sans-serif; line-height: 1.6; padding: 1rem; max-width: 800px; margin: auto; }
-    h1, h2, h3 { color: #2c3e50; }
-    pre { background: #1e1e1e; color: #f1f1f1; padding: 1rem; overflow-x: auto; border-radius: 6px; }
-    code { background: #f4f4f4; padding: 0.2em 0.4em; border-radius: 4px; }
-    a { color: #3498db; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #0d1117;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h1, h2, h3 {
+      color: #0d1117;
+    }
+    pre {
+      background-color: #282c34;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, Monaco, monospace;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #777;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #0366d6;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>WireGuard VPN Setup on Raspberry Pi 4B</h1>
-    <p><strong>Author:</strong> Zahid &nbsp;|&nbsp; <strong>Date:</strong> July 3, 2025</p>
-    <hr>
-  </header>
 
-  <main>
-    <h2>📦 Requirements</h2>
-    <ul>
-      <li>Raspberry Pi 4B with Raspberry Pi OS (Lite or Desktop)</li>
-      <li>sudo/root access</li>
-      <li>Static IP or dynamic DNS</li>
-      <li>Port forwarding (UDP port 51820)</li>
-    </ul>
+<header>
+  <h1>WireGuard on Raspberry Pi 4B</h1>
+  <p>A step-by-step guide to install and configure a secure WireGuard VPN</p>
+</header>
 
-    <h2>1️⃣ Update Your System</h2>
-    <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+<main>
+  <section>
+    <h2>1. Update Your Raspberry Pi</h2>
+    <p>First, update your Raspberry Pi to make sure you have the latest packages and kernel:</p>
+    <pre><code class="language-bash">sudo apt update && sudo apt upgrade -y
+sudo reboot</code></pre>
+  </section>
 
-    <h2>2️⃣ Install WireGuard</h2>
-    <pre><code>sudo apt install wireguard -y</code></pre>
+  <section>
+    <h2>2. Install WireGuard</h2>
+    <p>Install WireGuard using the official package manager:</p>
+    <pre><code class="language-bash">sudo apt install wireguard -y</code></pre>
+  </section>
 
-    <h2>3️⃣ Generate Keys</h2>
-    <pre><code>umask 077
-wg genkey | tee privatekey | wg pubkey > publickey</code></pre>
+  <section>
+    <h2>3. Enable IP Forwarding</h2>
+    <p>Edit <code>/etc/sysctl.conf</code> and uncomment or add the following line:</p>
+    <pre><code class="language-bash">sudo nano /etc/sysctl.conf</code></pre>
+    <pre><code class="language-conf">net.ipv4.ip_forward=1</code></pre>
+    <p>Then apply the change:</p>
+    <pre><code class="language-bash">sudo sysctl -p</code></pre>
+  </section>
 
-    <h2>4️⃣ Create Configuration File</h2>
-    <p>Create a new file at <code>/etc/wireguard/wg0.conf</code>:</p>
-    <pre><code>[Interface]
-Address = 10.0.0.1/24
+  <section>
+    <h2>4. Generate Keys</h2>
+    <p>Create private and public keys for the WireGuard server:</p>
+    <pre><code class="language-bash">wg genkey | tee privatekey | wg pubkey > publickey</code></pre>
+  </section>
+
+  <section>
+    <h2>5. Configure WireGuard Server</h2>
+    <p>Create a config file at <code>/etc/wireguard/wg0.conf</code>:</p>
+    <pre><code class="language-ini">[Interface]
 PrivateKey = YOUR_PRIVATE_KEY
+Address = 10.0.0.1/24
 ListenPort = 51820
+SaveConfig = true
 
-# Save configuration on shutdown
-SaveConfig = true</code></pre>
+[Peer]
+# Example client
+PublicKey = CLIENT_PUBLIC_KEY
+AllowedIPs = 10.0.0.2/32</code></pre>
+    <p>Replace <code>YOUR_PRIVATE_KEY</code> and <code>CLIENT_PUBLIC_KEY</code> accordingly.</p>
+  </section>
 
-    <h2>5️⃣ Enable IP Forwarding</h2>
-    <pre><code>sudo nano /etc/sysctl.conf</code></pre>
-    <p>Uncomment or add:</p>
-    <pre><code>net.ipv4.ip_forward=1</code></pre>
-    <p>Apply changes:</p>
-    <pre><code>sudo sysctl -p</code></pre>
+  <section>
+    <h2>6. Start and Enable WireGuard</h2>
+    <pre><code class="language-bash">sudo systemctl start wg-quick@wg0
+sudo systemctl enable wg-quick@wg0</code></pre>
+  </section>
 
-    <h2>6️⃣ Configure Firewall/NAT</h2>
-    <pre><code>sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-sudo iptables-save | sudo tee /etc/iptables/rules.v4</code></pre>
+  <section>
+    <h2>7. Firewall and NAT (Optional)</h2>
+    <p>If you're using <code>iptables</code> to allow NAT, run:</p>
+    <pre><code class="language-bash">sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo iptables-save > /etc/iptables/rules.v4</code></pre>
+  </section>
 
-    <h2>7️⃣ Start WireGuard</h2>
-    <pre><code>sudo systemctl enable wg-quick@wg0
-sudo systemctl start wg-quick@wg0</code></pre>
-
-    <h2>8️⃣ Add Peer (Client)</h2>
-    <p>Example peer config (e.g., Android/Windows):</p>
-    <pre><code>[Interface]
+  <section>
+    <h2>8. Client Configuration</h2>
+    <p>On your client (e.g., mobile or desktop), use the following config:</p>
+    <pre><code class="language-ini">[Interface]
 PrivateKey = CLIENT_PRIVATE_KEY
 Address = 10.0.0.2/24
 
 [Peer]
 PublicKey = SERVER_PUBLIC_KEY
 Endpoint = YOUR_PI_PUBLIC_IP:51820
-AllowedIPs = 0.0.0.0/0</code></pre>
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 25</code></pre>
+  </section>
 
-    <h2>🧪 Test Your VPN</h2>
-    <p>Check connection on the Pi:</p>
-    <pre><code>sudo wg show</code></pre>
-    <p>Ping from the client:</p>
-    <pre><code>ping 10.0.0.1</code></pre>
+  <section>
+    <h2>9. Testing the Connection</h2>
+    <p>Once everything is set up, you can verify the status:</p>
+    <pre><code class="language-bash">sudo wg</code></pre>
+    <p>Or to see interface info:</p>
+    <pre><code class="language-bash">ip a show wg0</code></pre>
+  </section>
+</main>
 
-    <h2>🔒 Optional: DNS & Kill Switch</h2>
-    <p>You can add DNS and kill-switch rules in the client config. For example:</p>
-    <pre><code>DNS = 1.1.1.1</code></pre>
+<footer>
+  &copy; 2025 Zahid. Powered by HTML & ❤️
+</footer>
 
-    <h2>📘 Resources</h2>
-    <ul>
-      <li><a href="https://www.wireguard.com/" target="_blank">WireGuard Official Site</a></li>
-      <li><a href="https://pimylifeup.com/raspberry-pi-wireguard/" target="_blank">Pi My Life Up Guide</a></li>
-    </ul>
-
-    <hr>
-    <p><em>Note: Always keep your keys private and secure. Use a firewall to limit access where possible.</em></p>
-  </main>
-
-  <footer>
-    <hr>
-    <p>© 2025 Zahid • Powered by Hugo & LoveIt Theme</p>
-  </footer>
+<!-- PrismJS for syntax highlighting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ini.min.js"></script>
 </body>
 </html>
