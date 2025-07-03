@@ -1,148 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WireGuard Setup on Raspberry Pi 4B</title>
-  <meta name="description" content="Step-by-step guide to setting up WireGuard VPN on a Raspberry Pi 4B">
+  <meta name="robots" content="noodp" />
+  <title>WireGuard Setup – Zahid</title>
+  <meta name="description" content="Step-by-step guide to install and configure WireGuard VPN on a Raspberry Pi 4B">
+  <meta property="og:title" content="WireGuard Setup – Zahid" />
+  <meta property="og:description" content="Step-by-step guide to install and configure WireGuard VPN on a Raspberry Pi 4B" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://F2ncy.github.io/post/wg/" />
+  <meta property="og:site_name" content="Zahid's Site" />
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="WireGuard Setup – Zahid"/>
+  <meta name="twitter:description" content="Step-by-step guide to install and configure WireGuard VPN on a Raspberry Pi 4B"/>
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <link rel="canonical" href="https://F2ncy.github.io/post/wg/" />
+  <link rel="stylesheet" href="/css/style.min.css">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css">
+  </noscript>
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+  </noscript>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background-color: #0d1117;
-      color: white;
-      padding: 1.5rem;
-      text-align: center;
-    }
-    main {
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem;
-    }
-    h1, h2, h3 {
-      color: #0d1117;
-    }
-    pre {
-      background-color: #282c34;
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
-    }
-    code {
-      font-family: Consolas, Monaco, monospace;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: #777;
-      font-size: 0.9rem;
-    }
-    a {
-      color: #0366d6;
-    }
-  </style>
 </head>
-<body>
+<body data-header-desktop="fixed" data-header-mobile="auto">
+  <script>
+    (window.localStorage && localStorage.getItem('theme') ?
+      localStorage.getItem('theme') === 'dark' :
+      ('dark' === 'auto' ?
+        window.matchMedia('(prefers-color-scheme: dark)').matches :
+        'dark' === 'dark')) &&
+      document.body.setAttribute('theme', 'dark');
+  </script>
 
-<header>
-  <h1>WireGuard on Raspberry Pi 4B</h1>
-  <p>A step-by-step guide to install and configure a secure WireGuard VPN</p>
-</header>
+  <div id="mask"></div>
+  <div class="wrapper">
 
-<main>
-  <section>
-    <h2>1. Update Your Raspberry Pi</h2>
-    <p>First, update your Raspberry Pi to make sure you have the latest packages and kernel:</p>
-    <pre><code class="language-bash">sudo apt update && sudo apt upgrade -y
+    <!-- Desktop Header -->
+    <header class="desktop" id="header-desktop">
+      <div class="header-wrapper">
+        <div class="header-title"><a href="/" title="Zahid">HomePage</a></div>
+        <div class="menu">
+          <div class="menu-inner">
+            <a class="menu-item" href="/post/about/" title="About">About</a>
+            <a class="menu-item" href="/post/" title="Posts">Posts</a>
+            <a class="menu-item active" href="/post/wg/" title="WireGuard">WireGuard</a>
+            <span class="menu-item delimiter"></span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+              <i class="fas fa-adjust fa-fw"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Header -->
+    <header class="mobile" id="header-mobile">
+      <div class="header-container">
+        <div class="header-wrapper">
+          <div class="header-title"><a href="/" title="Zahid">HomePage</a></div>
+          <div class="menu-toggle" id="menu-toggle-mobile"><span></span><span></span><span></span></div>
+        </div>
+        <div class="menu" id="menu-mobile">
+          <a class="menu-item" href="/post/about/" title="About">About</a>
+          <a class="menu-item" href="/post/" title="Posts">Posts</a>
+          <a class="menu-item active" href="/post/wg/" title="WireGuard">WireGuard</a>
+          <a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+            <i class="fas fa-adjust fa-fw"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="container">
+        <div class="page single special">
+          <h1 class="single-title animate__animated animate__pulse animate__faster">WireGuard on Raspberry Pi 4B</h1>
+          <div class="content" id="content">
+
+            <h2>1. Update & Upgrade</h2>
+            <pre><code class="language-bash">sudo apt update && sudo apt upgrade -y
 sudo reboot</code></pre>
-  </section>
 
-  <section>
-    <h2>2. Install WireGuard</h2>
-    <p>Install WireGuard using the official package manager:</p>
-    <pre><code class="language-bash">sudo apt install wireguard -y</code></pre>
-  </section>
+            <h2>2. Install WireGuard</h2>
+            <pre><code class="language-bash">sudo apt install wireguard -y</code></pre>
 
-  <section>
-    <h2>3. Enable IP Forwarding</h2>
-    <p>Edit <code>/etc/sysctl.conf</code> and uncomment or add the following line:</p>
-    <pre><code class="language-bash">sudo nano /etc/sysctl.conf</code></pre>
-    <pre><code class="language-conf">net.ipv4.ip_forward=1</code></pre>
-    <p>Then apply the change:</p>
-    <pre><code class="language-bash">sudo sysctl -p</code></pre>
-  </section>
+            <h2>3. Enable IP Forwarding</h2>
+            <p>Edit <code>/etc/sysctl.conf</code>:</p>
+            <pre><code class="language-conf">net.ipv4.ip_forward=1</code></pre>
+            <p>Apply:</p>
+            <pre><code class="language-bash">sudo sysctl -p</code></pre>
 
-  <section>
-    <h2>4. Generate Keys</h2>
-    <p>Create private and public keys for the WireGuard server:</p>
-    <pre><code class="language-bash">wg genkey | tee privatekey | wg pubkey > publickey</code></pre>
-  </section>
+            <h2>4. Generate Server Keys</h2>
+            <pre><code class="language-bash">wg genkey | tee privatekey | wg pubkey > publickey</code></pre>
 
-  <section>
-    <h2>5. Configure WireGuard Server</h2>
-    <p>Create a config file at <code>/etc/wireguard/wg0.conf</code>:</p>
-    <pre><code class="language-ini">[Interface]
-PrivateKey = YOUR_PRIVATE_KEY
+            <h2>5. Create <code>wg0.conf</code></h2>
+            <pre><code class="language-ini">[Interface]
+PrivateKey = &lt;YOUR_PRIVATE_KEY&gt;
 Address = 10.0.0.1/24
 ListenPort = 51820
 SaveConfig = true
 
 [Peer]
-# Example client
-PublicKey = CLIENT_PUBLIC_KEY
+# Client example
+PublicKey = &lt;CLIENT_PUBLIC_KEY&gt;
 AllowedIPs = 10.0.0.2/32</code></pre>
-    <p>Replace <code>YOUR_PRIVATE_KEY</code> and <code>CLIENT_PUBLIC_KEY</code> accordingly.</p>
-  </section>
 
-  <section>
-    <h2>6. Start and Enable WireGuard</h2>
-    <pre><code class="language-bash">sudo systemctl start wg-quick@wg0
+            <h2>6. Start & Enable</h2>
+            <pre><code class="language-bash">sudo systemctl start wg-quick@wg0
 sudo systemctl enable wg-quick@wg0</code></pre>
-  </section>
 
-  <section>
-    <h2>7. Firewall and NAT (Optional)</h2>
-    <p>If you're using <code>iptables</code> to allow NAT, run:</p>
-    <pre><code class="language-bash">sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-sudo iptables-save > /etc/iptables/rules.v4</code></pre>
-  </section>
+            <h2>7. (Optional) NAT with iptables</h2>
+            <pre><code class="language-bash">sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo iptables-save &gt; /etc/iptables/rules.v4</code></pre>
 
-  <section>
-    <h2>8. Client Configuration</h2>
-    <p>On your client (e.g., mobile or desktop), use the following config:</p>
-    <pre><code class="language-ini">[Interface]
-PrivateKey = CLIENT_PRIVATE_KEY
+            <h2>8. Client Config</h2>
+            <pre><code class="language-ini">[Interface]
+PrivateKey = &lt;CLIENT_PRIVATE_KEY&gt;
 Address = 10.0.0.2/24
 
 [Peer]
-PublicKey = SERVER_PUBLIC_KEY
-Endpoint = YOUR_PI_PUBLIC_IP:51820
+PublicKey  = &lt;SERVER_PUBLIC_KEY&gt;
+Endpoint   = your.pi.public.ip:51820
 AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 25</code></pre>
-  </section>
 
-  <section>
-    <h2>9. Testing the Connection</h2>
-    <p>Once everything is set up, you can verify the status:</p>
-    <pre><code class="language-bash">sudo wg</code></pre>
-    <p>Or to see interface info:</p>
-    <pre><code class="language-bash">ip a show wg0</code></pre>
-  </section>
-</main>
+            <h2>9. Verify</h2>
+            <pre><code class="language-bash">sudo wg
+ip a show wg0</code></pre>
 
-<footer>
-  &copy; 2025 Zahid. Powered by HTML & ❤️
-</footer>
+          </div>
+        </div>
+      </div>
+    </main>
 
-<!-- PrismJS for syntax highlighting -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ini.min.js"></script>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-line">
+          Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> |
+          Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreferrer">LoveIt</a>
+        </div>
+        <div class="footer-line">
+          <i class="far fa-copyright fa-fw"></i>
+          <span>2025</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Fixed Buttons -->
+  <div id="fixed-buttons">
+    <a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+      <i class="fas fa-arrow-up fa-fw"></i>
+    </a>
+    <a href="#" id="view-comments" class="fixed-button" title="View Comments">
+      <i class="fas fa-comment fa-fw"></i>
+    </a>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script>
+  <script src="/js/theme.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ini.min.js"></script>
 </body>
 </html>
