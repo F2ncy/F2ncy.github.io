@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WireGuard Setup - Raspberry Pi 4B</title>
+  <meta name="description" content="Step-by-step guide to setting up WireGuard VPN on a Raspberry Pi 4B.">
+  <link rel="stylesheet" href="/css/style.min.css">
+  <style>
+    body { font-family: system-ui, sans-serif; line-height: 1.6; padding: 1rem; max-width: 800px; margin: auto; }
+    h1, h2, h3 { color: #2c3e50; }
+    pre { background: #1e1e1e; color: #f1f1f1; padding: 1rem; overflow-x: auto; border-radius: 6px; }
+    code { background: #f4f4f4; padding: 0.2em 0.4em; border-radius: 4px; }
+    a { color: #3498db; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>WireGuard VPN Setup on Raspberry Pi 4B</h1>
+    <p><strong>Author:</strong> Zahid &nbsp;|&nbsp; <strong>Date:</strong> July 3, 2025</p>
+    <hr>
+  </header>
+
+  <main>
+    <h2>📦 Requirements</h2>
+    <ul>
+      <li>Raspberry Pi 4B with Raspberry Pi OS (Lite or Desktop)</li>
+      <li>sudo/root access</li>
+      <li>Static IP or dynamic DNS</li>
+      <li>Port forwarding (UDP port 51820)</li>
+    </ul>
+
+    <h2>1️⃣ Update Your System</h2>
+    <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+
+    <h2>2️⃣ Install WireGuard</h2>
+    <pre><code>sudo apt install wireguard -y</code></pre>
+
+    <h2>3️⃣ Generate Keys</h2>
+    <pre><code>umask 077
+wg genkey | tee privatekey | wg pubkey > publickey</code></pre>
+
+    <h2>4️⃣ Create Configuration File</h2>
+    <p>Create a new file at <code>/etc/wireguard/wg0.conf</code>:</p>
+    <pre><code>[Interface]
+Address = 10.0.0.1/24
+PrivateKey = YOUR_PRIVATE_KEY
+ListenPort = 51820
+
+# Save configuration on shutdown
+SaveConfig = true</code></pre>
+
+    <h2>5️⃣ Enable IP Forwarding</h2>
+    <pre><code>sudo nano /etc/sysctl.conf</code></pre>
+    <p>Uncomment or add:</p>
+    <pre><code>net.ipv4.ip_forward=1</code></pre>
+    <p>Apply changes:</p>
+    <pre><code>sudo sysctl -p</code></pre>
+
+    <h2>6️⃣ Configure Firewall/NAT</h2>
+    <pre><code>sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo iptables-save | sudo tee /etc/iptables/rules.v4</code></pre>
+
+    <h2>7️⃣ Start WireGuard</h2>
+    <pre><code>sudo systemctl enable wg-quick@wg0
+sudo systemctl start wg-quick@wg0</code></pre>
+
+    <h2>8️⃣ Add Peer (Client)</h2>
+    <p>Example peer config (e.g., Android/Windows):</p>
+    <pre><code>[Interface]
+PrivateKey = CLIENT_PRIVATE_KEY
+Address = 10.0.0.2/24
+
+[Peer]
+PublicKey = SERVER_PUBLIC_KEY
+Endpoint = YOUR_PI_PUBLIC_IP:51820
+AllowedIPs = 0.0.0.0/0</code></pre>
+
+    <h2>🧪 Test Your VPN</h2>
+    <p>Check connection on the Pi:</p>
+    <pre><code>sudo wg show</code></pre>
+    <p>Ping from the client:</p>
+    <pre><code>ping 10.0.0.1</code></pre>
+
+    <h2>🔒 Optional: DNS & Kill Switch</h2>
+    <p>You can add DNS and kill-switch rules in the client config. For example:</p>
+    <pre><code>DNS = 1.1.1.1</code></pre>
+
+    <h2>📘 Resources</h2>
+    <ul>
+      <li><a href="https://www.wireguard.com/" target="_blank">WireGuard Official Site</a></li>
+      <li><a href="https://pimylifeup.com/raspberry-pi-wireguard/" target="_blank">Pi My Life Up Guide</a></li>
+    </ul>
+
+    <hr>
+    <p><em>Note: Always keep your keys private and secure. Use a firewall to limit access where possible.</em></p>
+  </main>
+
+  <footer>
+    <hr>
+    <p>© 2025 Zahid • Powered by Hugo & LoveIt Theme</p>
+  </footer>
+</body>
+</html>
